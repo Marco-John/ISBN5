@@ -11,6 +11,23 @@ class TestIsbnChecker < Minitest::Test
 #2.  ISBN-13 is made up of 12 digits and a check digit
 #3.  Remove spaces and hyphens from string
 
+def test_string_without_10_or_13_numbers
+		assert_equal(false, valid_isbn?("12345678"))
+		assert_equal(false, valid_isbn?("12345678901234"))
+end
+
+def test_string_with_10_or_13_numbers
+		assert_equal(true, valid_isbn?("0471958697"))
+		assert_equal(true, valid_isbn?("9780470059029"))
+end
+
+def test_removing_spaces_and_hyphens
+		assert_equal(true, valid_isbn?("0471 958 697"))
+		assert_equal(true, valid_isbn?("97  8047 0059029"))
+				assert_equal(true, valid_isbn?("0471 958-697"))
+		assert_equal(true, valid_isbn?("97  8047-0059029"))
+end
+
 #ISBN-10
 
 #4.  Multiply each digit by its position
