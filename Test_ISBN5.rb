@@ -12,13 +12,13 @@ class TestIsbnChecker < Minitest::Test
 #3.  Remove spaces and hyphens from string
 
 def test_string_without_10_or_13_numbers
-		assert_equal(false, correct_length?("12345678"))
-		assert_equal(false, correct_length?("12345678901234"))
+		assert_equal(false, valid_isbn?("12345678"))
+		assert_equal(false, valid_isbn?("12345678901234"))
 end
 
 def test_string_with_10_or_13_numbers
-		assert_equal(true, correct_length?("0471958697"))
-		assert_equal(true, correct_length?("9780470059029"))
+		assert_equal(true, valid_isbn?("0471958697"))
+		assert_equal(true, valid_isbn?("9780470059029"))
 end
 
 def test_removing_spaces_and_hyphens
@@ -46,6 +46,17 @@ def test_invalid_characters_in_isbn
 		assert_equal(false, invalid_characters_in_isbn("0471a9586*97"))
 end
 
+def test_adding_x_back_to_isbn
+		assert_equal("877195869x", add_x_back_to_isbn("877195869"))
+end
+
+def test_isbn10_multiply_progression_and_modulus
+		assert_equal(3, isbn10_multiply_progression_and_modulus("123"))
+end
+
+def test_valid_isbn10
+		assert_equal(true, valid_isbn10?("0471958697"))
+end
 #ISBN-13
 
 #9.  Multiply each digit alternately by 1 then 3
